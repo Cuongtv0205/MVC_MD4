@@ -1,11 +1,8 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.router = void 0;
 const express_1 = require("express");
-const product_controller_1 = __importDefault(require("../controller/product-controller"));
+const product_router_1 = require("./product-router");
 exports.router = (0, express_1.Router)();
-exports.router.get('/products', product_controller_1.default.getAllProduct);
+exports.router.use('', product_router_1.routerProduct);
 //# sourceMappingURL=router.js.map

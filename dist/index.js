@@ -5,10 +5,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const router_1 = require("./src/router/router");
+const express_fileupload_1 = __importDefault(require("express-fileupload"));
 const app = (0, express_1.default)();
 app.set('view engine', 'ejs');
 app.set('views', './src/views');
+app.use(express_1.default.static('public'));
 app.use(express_1.default.json());
+app.use((0, express_fileupload_1.default)({
+    createParentPath: true
+}));
 app.use('', router_1.router);
 const PORT = 3000;
 app.listen(PORT, () => {

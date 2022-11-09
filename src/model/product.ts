@@ -1,20 +1,25 @@
 import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
-@Entity({name : 'products'})
+@Entity({name: 'products'})
 export class Product {
     @PrimaryGeneratedColumn({type: 'int'})
-    public readonly id : number;
+    public readonly id: number;
 
     @Column({type: 'varchar'})
-    public name : string;
+    public name: string;
 
     @Column({type: 'double'})
-    public price : number;
+    public price: number;
 
     @Column({type: 'varchar'})
-    public description : string;
+    public description: string;
 
     @Column({type: 'int'})
-    public quantity : number;
+    public quantity: number;
 
+    @Column({type: 'varchar'})
+    public image: string;
+
+    @Column({type: 'int'})
+    public idCategory:number;
 }

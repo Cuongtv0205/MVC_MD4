@@ -1,0 +1,29 @@
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5 pb-3"   >
+        <% for (let i = 0; i < listProduct.length; i++){ %>
+            <div class="col-lg-6 col-6 text-left">
+                <form action="">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for products" name="find">
+                        <div class="input-group-append">
+                            <button type="submit"><span class="input-group-text bg-transparent text-primary">
+                                <i class="fa fa-search"></i>
+                            </span></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-4 col-md-6 pb-1">
+                <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
+                    <p class="text-right"><%= listProduct[i].quantity%>Products</p>
+                    <a href="" class="cat-img position-relative overflow-hidden mb-3">
+                        <img class="img-fluid" src="<%= listProduct[i].image%>" alt="">
+                    </a>
+                    <h5 class="font-weight-semi-bold m-0"><%= listProduct[i].name%></h5>
+                </div>
+                <a href="/edit/<%= listProduct[i].id %>">Edit</a> <br>
+                <a href="/delete/<%= listProduct[i].id %>">Delete</a> <br>
+            </div>
+        <%} %>
+    </div>
+</div>
