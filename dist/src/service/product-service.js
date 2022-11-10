@@ -45,17 +45,8 @@ class ProductService {
             else {
             }
         };
-        this.findProduct = async (req, res) => {
-            let id = +req.params.id;
-            let files = req.files;
-            if (files != null) {
-                let product = req.body.find;
-                let image = files.image;
-                await image.mv('./public/storage/' + image.name);
-                product.image = 'storage/' + image.name;
-                await this.productRepository.search({ id: id }, product);
-                res.redirect(301, '/products');
-            }
+        this.findProduct = async (name) => {
+            return this.productRepository.findBy({ name: name });
         };
         data_source_1.AppDataSource.initialize().then(async (connection) => {
             console.log('--Connect Database Success--');

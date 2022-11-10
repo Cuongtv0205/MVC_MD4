@@ -1,24 +1,35 @@
 import {ProductService} from "../service/product-service";
 import {Request, Response} from "express";
+// import {CategoryService} from "../service/category-service";
+
+
 
 export class ProductController {
 
     //Kiểu dữ liệu để tương tác
     private productService: ProductService
+    // private categoryService: CategoryService
 
     constructor() {
         this.productService = new ProductService();
+        // this.categoryService = new CategoryService();
     }
 
     getAllProduct = async (req: Request, res: Response) => {
         let products = await this.productService.findAll(req, res);
+        // let category = await this.categoryService.findAllCategory(req,res)
         res.render('product/list', {
             listProduct: products
         })
+
+
     }
 
     showFormCreate = async (req: Request, res: Response) => {
-        res.render('product/create');
+        // let category = await this.categoryService.findAllCategory(req,res)
+        res.render('product/create',{
+
+        });
     }
 
     createProduct = async (req: Request, res: Response) => {
@@ -53,16 +64,11 @@ export class ProductController {
 
 
     formSearchP = async (req:Request,res:Response)=>{
-        if (!isNaN(+req.params.id)) {
-            let product = await this.productService.findById(req, res);
-            res.render('product/showFindList', {
-                product: product
-            })
-        }
-    }
-
-    searchP = async (req:Request,res:Response)=>{
-        await this.productService.findProduct(req,res);
+        let products = await this.productService.findProduct(req.body.name);
+        console.log(products);
+        res.render('product/list', {
+            listProduct: products
+        })
     }
 }
 

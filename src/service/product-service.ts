@@ -2,7 +2,7 @@ import {AppDataSource} from "../data-source";
 import {Product} from "../model/product";
 import {Request, Response} from "express";
 import {UploadedFile} from "express-fileupload";
-import {ProductController} from "../controller/product-controller";
+
 
 
 export class ProductService {
@@ -15,13 +15,13 @@ export class ProductService {
             console.log('--Connect Database Success--')
             this.productRepository = await connection.getRepository(Product);
         })
-
     }
 
     // Request và Response của express
     findAll = async (req: Request, res: Response) => {
         //find lấy ra tất cả
         return await this.productRepository.find();
+
     }
 
     saveProduct = async (req: Request, res: Response) => {
@@ -69,17 +69,8 @@ export class ProductService {
 
         }
     }
-
-    findProduct = async (req:Request,res:Response)=>{
-        let id = +req.params.id;
-        let files = req.files;
-        if (files != null) {
-            let product = req.body.find;
-            let image = files.image as UploadedFile;
-            await image.mv('./public/storage/' + image.name);
-            product.image = 'storage/' + image.name;
-            await this.productRepository.search({id: id}, product)
-            res.redirect(301, '/products',)
-        }
+    findProduct = async (name) => {
+        return this.productRepository.findBy({name:name})
     }
+
 }

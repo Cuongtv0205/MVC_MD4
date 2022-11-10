@@ -11,7 +11,7 @@ class ProductController {
             });
         };
         this.showFormCreate = async (req, res) => {
-            res.render('product/create');
+            res.render('product/create', {});
         };
         this.createProduct = async (req, res) => {
             await this.productService.saveProduct(req, res);
@@ -39,15 +39,11 @@ class ProductController {
             await this.productService.deleteProduct(req, res);
         };
         this.formSearchP = async (req, res) => {
-            if (!isNaN(+req.params.id)) {
-                let product = await this.productService.findById(req, res);
-                res.render('product/showFindList', {
-                    product: product
-                });
-            }
-        };
-        this.searchP = async (req, res) => {
-            await this.productService.findProduct(req, res);
+            let products = await this.productService.findProduct(req.body.name);
+            console.log(products);
+            res.render('product/list', {
+                listProduct: products
+            });
         };
         this.productService = new product_service_1.ProductService();
     }

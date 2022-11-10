@@ -11,5 +11,5 @@ routerProduct.get('/edit/:id',productController.formEditProduct);
 routerProduct.post('/edit/:id',productController.editP);
 routerProduct.get('/delete/:id',productController.fromDeleteProduct);
 routerProduct.post('/delete/:id',productController.deleteP);
-routerProduct.get('/showFindList/:id',productController.formSearchP);
-routerProduct.post('/showFindList/:id',productController.searchP);
+
+routerProduct.post('/products',productController.formSearchP);

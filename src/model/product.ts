@@ -20,6 +20,6 @@ export class Product {
     @Column({type: 'varchar'})
     public image: string;
 
-    @Column({type: 'int'})
-    public idCategory:number;
+    // @Column({type: 'int'})
+    // public idCategory:number;
 }
