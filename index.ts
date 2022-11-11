@@ -12,7 +12,7 @@ app.use(fileUpload({
 }));
 app.use('', router);
 
-const PORT = 3000;
+const PORT = 8081;
 
 app.listen(PORT, () => {
     console.log('--Server is Running--');

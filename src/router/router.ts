@@ -1,8 +1,10 @@
 import {Router} from "express";
 import {routerProduct} from "./product-router";
-// import {routerCategory} from "./category-router";
+import categoryController from "../controller/category-controller";
+import {categoryRouter} from "./category-router";
+
 
 export const router = Router();
 router.use('', routerProduct);
-// router.use('',routerCategory);
+router.use('',categoryRouter);
 

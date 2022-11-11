@@ -1,27 +1,39 @@
-<div>
-    <form  method="post" enctype="multipart/form-data">
+<div style="text-shadow: #a1b6ff">
+    <form method="post" enctype="multipart/form-data">
+        <h6>Tên SP:</h6>
         <div class="control-group">
-            <input type="text" class="form-control"  placeholder="name" name="name" value="<%= product.name %>"
+            <input type="text" class="form-control"  placeholder="name" name="name"
                    required="required" data-validation-required-message="Please enter your name"/>
         </div>
         <div class="control-group">
-            <input type="text" class="form-control"  placeholder="price" name="price" value="<%= product.price %>"
+            <h6>Giá:</h6>
+            <input type="text" class="form-control"  placeholder="price" name="price"
                    required="required" data-validation-required-message="Please enter your name"/>
         </div>
         <div class="control-group">
-            <input type="text" class="form-control"  placeholder="description" name="description" value="<%= product.description %>"
+            <h6>Mô tả:</h6>
+            <input type="text" class="form-control"  placeholder="description" name="description"
                    required="required" data-validation-required-message="Please enter your name"/>
         </div>
         <div class="control-group">
-            <input type="text" class="form-control" placeholder="quantity" name="quantity" value="<%= product.quantity %>"
+            <h6>Số <lượng></lượng>:</h6>
+            <input type="text" class="form-control" placeholder="quantity" name="quantity"
                    required="required" data-validation-required-message="Please enter your name"/>
         </div>
+        <hr>
+        <select name="idCategory" class="form-select" aria-label="Default select example">
+            <option selected>Open this select menu</option>
+            <%for (let i =0; i < listCategory.length; i ++){%>
+                <option value="<%= listCategory[i].idCategory%>"><%= listCategory[i].nameCategory%></option>
+            <% } %>
+        </select>
+        <hr>
         <div class="control-group">
             <input type="file" class="form-control"  name="image"
                    required="required" data-validation-required-message="Please enter your email" multiple/>
             <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Edit
             </button>
         </div>
-        <img src="<%= product.image%>" alt="">
+
     </form>
 </div>

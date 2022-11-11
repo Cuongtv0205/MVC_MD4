@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductController = void 0;
 const product_service_1 = require("../service/product-service");
+const category_service_1 = require("../service/category-service");
 class ProductController {
     constructor() {
         this.getAllProduct = async (req, res) => {
@@ -11,16 +12,23 @@ class ProductController {
             });
         };
         this.showFormCreate = async (req, res) => {
-            res.render('product/create', {});
+            let category = await this.categoryService.findAllC(req, res);
+            res.render('product/create', {
+                listCategory: category
+            });
         };
         this.createProduct = async (req, res) => {
             await this.productService.saveProduct(req, res);
         };
         this.formEditProduct = async (req, res) => {
-            if (!isNaN(+req.params.id)) {
+            let id = +req.params.id;
+            console.log(id);
+            if (!isNaN(id)) {
+                let category = await this.categoryService.findAllC(req, res);
                 let product = await this.productService.findById(req, res);
+                console.log(product);
                 res.render('product/edit', {
-                    product: product
+                    listProduct: product, listCategory: category
                 });
             }
         };
@@ -30,8 +38,9 @@ class ProductController {
         this.fromDeleteProduct = async (req, res) => {
             if (!isNaN(+req.params.id)) {
                 let product = await this.productService.findById(req, res);
+                let category = await this.categoryService.findAllC(req, res);
                 res.render('product/delete', {
-                    product: product
+                    product: product, listProduct: category
                 });
             }
         };
@@ -40,12 +49,12 @@ class ProductController {
         };
         this.formSearchP = async (req, res) => {
             let products = await this.productService.findProduct(req.body.name);
-            console.log(products);
             res.render('product/list', {
                 listProduct: products
             });
         };
         this.productService = new product_service_1.ProductService();
+        this.categoryService = new category_service_1.CategoryService();
     }
 }
 exports.ProductController = ProductController;

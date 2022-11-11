@@ -1,6 +1,6 @@
 import {ProductService} from "../service/product-service";
 import {Request, Response} from "express";
-// import {CategoryService} from "../service/category-service";
+import {CategoryService} from "../service/category-service";
 
 
 
@@ -8,27 +8,24 @@ export class ProductController {
 
     //Kiểu dữ liệu để tương tác
     private productService: ProductService
-    // private categoryService: CategoryService
+    private categoryService: CategoryService
 
     constructor() {
         this.productService = new ProductService();
-        // this.categoryService = new CategoryService();
+        this.categoryService = new CategoryService();
     }
 
     getAllProduct = async (req: Request, res: Response) => {
         let products = await this.productService.findAll(req, res);
-        // let category = await this.categoryService.findAllCategory(req,res)
         res.render('product/list', {
             listProduct: products
         })
-
-
     }
 
     showFormCreate = async (req: Request, res: Response) => {
-        // let category = await this.categoryService.findAllCategory(req,res)
+        let category = await this.categoryService.findAllC(req,res);
         res.render('product/create',{
-
+            listCategory : category
         });
     }
 
@@ -37,10 +34,14 @@ export class ProductController {
     }
 
     formEditProduct = async (req: Request, res: Response) => {
-        if (!isNaN(+req.params.id)) {
+        let id = +req.params.id
+        console.log(id)
+        if (!isNaN(id)){
+            let category = await this.categoryService.findAllC(req,res);
             let product = await this.productService.findById(req, res);
+            console.log(product);
             res.render('product/edit', {
-                product: product
+                listProduct: product ,listCategory: category
             });
         }
     }
@@ -52,8 +53,9 @@ export class ProductController {
     fromDeleteProduct = async (req:Request,res:Response)=>{
         if (!isNaN(+req.params.id)) {
             let product = await this.productService.findById(req, res);
+            let category = await this.categoryService.findAllC(req,res);
             res.render('product/delete', {
-                product: product
+                product: product, listProduct:category
             })
         }
     }
@@ -65,7 +67,6 @@ export class ProductController {
 
     formSearchP = async (req:Request,res:Response)=>{
         let products = await this.productService.findProduct(req.body.name);
-        console.log(products);
         res.render('product/list', {
             listProduct: products
         })

@@ -6,7 +6,9 @@ const product_1 = require("../model/product");
 class ProductService {
     constructor() {
         this.findAll = async (req, res) => {
-            return await this.productRepository.find();
+            return await this.productRepository.query(`select *
+                                                   from products p
+                                                            join category c on p.idCategory = c.idCategory`);
         };
         this.saveProduct = async (req, res) => {
             let files = req.files;
@@ -33,6 +35,7 @@ class ProductService {
         };
         this.findById = async (req, res) => {
             let id = +req.params.id;
+            console.log(await this.productRepository.findOneBy({ id: id }));
             return await this.productRepository.findOneBy({ id: id });
         };
         this.deleteProduct = async (req, res) => {
@@ -42,11 +45,9 @@ class ProductService {
                 await this.productRepository.delete({ id: id });
                 res.redirect(301, '/products');
             }
-            else {
-            }
         };
         this.findProduct = async (name) => {
-            return this.productRepository.findBy({ name: name });
+            return await this.productRepository.query(`select * from products where name like '%${name}%'`);
         };
         data_source_1.AppDataSource.initialize().then(async (connection) => {
             console.log('--Connect Database Success--');

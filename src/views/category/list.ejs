@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Apple Watch Shop</title>
+    <title>EShopper - Bootstrap Shop Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -46,11 +46,11 @@
     <div class="row align-items-center py-3 px-xl-5">
         <div class="col-lg-3 d-none d-lg-block">
             <a href="" class="text-decoration-none">
-                <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">W</span>Apple Watch</h1>
+                <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
             </a>
         </div>
         <div class="col-lg-6 col-6 text-left">
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action=""method="post" enctype="multipart/form-data">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for products" name="name">
                     <div class="input-group-append">
@@ -79,81 +79,21 @@
 <%- include ('../partial/nav-bar') %>
 <!-- Navbar End -->
 
-
-<!-- Contact Start -->
+<!-- Categories Start -->
 <div class="container-fluid pt-5">
-    <div class="text-center mb-4">
-        <h2 class="section-title px-5"><span class="px-2">Contact For Any Queries</span></h2>
-    </div>
-    <div class="row px-xl-5">
-        <div class="col-lg-7 mb-5">
-            <div class="contact-form">
-                <div id="success"></div>
-                <form action="/create" method="post" enctype="multipart/form-data">
-                    <div class="control-group">
-                        <input type="text" class="form-control" id="name" placeholder="name" name="name"
-                               required="required" data-validation-required-message="Please enter your name" />
-                        <p class="help-block text-danger"></p>
-                    </div>
-                    <div class="control-group">
-                        <input type="text" class="form-control" id="email" placeholder="price" name="price"
-                               required="required" data-validation-required-message="Please enter your email" />
-                        <p class="help-block text-danger"></p>
-                    </div>
-                    <div class="control-group">
-                        <input type="text" class="form-control" id="subject" placeholder="quantity" name="quantity"
-                               required="required" data-validation-required-message="Please enter a subject" />
-                        <p class="help-block text-danger"></p>
-                    </div>
-                    <div class="control-group">
-                            <textarea class="form-control" rows="6" id="message" placeholder="description" name="description"
-                                      required="required"
-                                      data-validation-required-message="Please enter your message"></textarea>
-                        <p class="help-block text-danger"></p>
-                    </div>
-                    <div class="control-group">
-                        <input type="file" class="form-control" id="subject" name="image"
-                               required="required" data-validation-required-message="Please enter a subject" />
-                        <p class="help-block text-danger"></p>
-                    </div>
-                    <div>
-                        <select name="idCategory" class="form-select" aria-label="Default select example">
-                            <option selected>Open this select menu</option>
-                            <%for (let i =0; i < listCategory.length; i ++){%>
-                            <option value="<%= listCategory[i].idCategory%>"><%= listCategory[i].nameCategory%></option>
-                            <% } %>
-                        </select>
-                        <br>
-                        <br>
-                        <br>
-                    </div>
-
-                    <div>
-                        <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Create</button>
-                    </div>
-                </form>
+    <div class="row px-xl-5 pb-3"   >
+        <% for (let i = 0; i < listCategory.length; i++){ %>
+            <div class="col-lg-4 col-md-6 pb-1">
+                <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
+                    <h5 class="font-weight-semi-bold m-0"><%= listCategory[i].nameCategory%></h5>
+                </div>
+                <a href="/edit/<%= listCategory[i].id %>">Edit</a> <br>
+                <a href="/delete/<%= listCategory[i].id %>">Delete</a> <br>
             </div>
-        </div>
-        <div class="col-lg-5 mb-5">
-            <h5 class="font-weight-semi-bold mb-3">Get In Touch</h5>
-            <p>Justo sed diam ut sed amet duo amet lorem amet stet sea ipsum, sed duo amet et. Est elitr dolor elitr erat sit sit. Dolor diam et erat clita ipsum justo sed.</p>
-            <div class="d-flex flex-column mb-3">
-                <h5 class="font-weight-semi-bold mb-3">Store 1</h5>
-                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
-                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
-                <p class="mb-2"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
-            </div>
-            <div class="d-flex flex-column">
-                <h5 class="font-weight-semi-bold mb-3">Store 2</h5>
-                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
-                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
-                <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
-            </div>
-        </div>
+        <%} %>
     </div>
 </div>
-<!-- Contact End -->
-
+<!-- Categories End -->
 
 <!-- Footer Start -->
 <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
